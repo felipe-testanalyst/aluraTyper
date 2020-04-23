@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Alura Typer</title>
+    <link rel="stylesheet" href="css/libs/materialize.min.css">
+    <link rel="stylesheet" href="css/libs/google-fonts.css">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="center">Alura Typer</h1>
+
+        <p class="frase left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sed ratione velit iusto doloribus veritatis officiis sit maxime autem ut! Consequuntur repudiandae odio quas fuga? Unde rerum ipsum fugiat optio.</p>
+
+        <ul class="informacoes center">
+            <li>
+                <i class="small material-icons icones">description</i>
+                <span id="tamanho-frase">0</span> palavras
+            </li>
+            <li>
+                <i class="small material-icons icones">query_builder</i>
+                <span id="tempo-digitacao">5</span> segundos
+            </li>
+        </ul>
+
+        <textarea class="campo" cols="30" rows="10"></textarea>
+        <a class="btn-floating btn-large waves-effect waves-light red">
+            <i class="material-icons" id="botao-reiniciar">restore</i>
+        </a>
+
+        <ul class="center">
+            <li><span id="numero-caracteres">0</span> Caracteres</li>
+            <li><span id="numero-palavras">0</span> Palavras</li>
+        </ul>
+
+        <section class="placar">
+            <h3 class="center">Placar</h3>
+            <table class="centered bordered">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>No. de Palavras</th>
+                        <th>Remover</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/placar.js"></script>
+</body>
+</html>
