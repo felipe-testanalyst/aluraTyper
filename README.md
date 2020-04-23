@@ -1,0 +1,2 @@
+# aluraTyper
+Typing Game
