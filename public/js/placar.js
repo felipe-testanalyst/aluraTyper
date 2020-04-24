@@ -14,6 +14,19 @@ function inserePlacar(){
     var linha = novaLinha(usuario, numPalavras); 
     linha.find(".botao-remover").click(removeLinha);   //busca pelo elemento que contem classe dentro da linha e chama a funcao remove linha no clique
     corpoTabela.prepend(linha);                       //adiciona linha retornada da funcao novaLinha no inicio do corpoTabela
+
+    $(".placar").slideDown(500);     //abre placar quando insere usuario no placar
+    scrollPlacar();
+}
+
+
+function scrollPlacar() {
+    var posicaoPlacar = $(".placar").offset().top;    //pega o valor do topo da tabela e guarda na posicaoPlacar
+
+    $("html").animate(                                // inicia animacao do html
+    {
+        scrollTop: posicaoPlacar + "px"               //faz o scroll para o topo da posicaoPlacar
+    }, 1000);
 }
 
 
@@ -42,10 +55,10 @@ function removeLinha(event){
     
     var linha =  $(this).parent().parent(); // salva o avo do elemento que foi clicado na variavel linha (usado na funcao insere placar)
 
-    linha.fadeOut(1000); //da fadeout na linha mas nao remove do HTML
+    linha.fadeOut(600); //da fadeout na linha mas nao remove do HTML
     setTimeout(function(){   //setTimeout com uma funcao anomima pra remover a linha o tempo tem que ser igual o fadeout
         linha.remove();
-    },1000);
+    },600);
 
 }
 
