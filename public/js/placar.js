@@ -1,3 +1,10 @@
+$("#botao-placar").click(mostraPlacar); 
+
+function mostraPlacar(){
+    $(".placar").stop().slideToggle(600);    //adiciona animacao para mostrar placar. o stop serve para interromper uma animacao caso seja chamada novamente
+}
+
+
 function inserePlacar(){
     var placar = $(".placar");
     var corpoTabela = placar.find("tbody");      //busca pelo tbody dentro de placar e coloca na variavel corpoTabela
@@ -34,3 +41,4 @@ function removeLinha(event){
     event.preventDefault();                    
     $(this).parent().parent().remove();       //remove o avo do elemento que foi clicado (usado na funcao insere placar)
 }
+
