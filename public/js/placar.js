@@ -38,7 +38,14 @@ function novaLinha(usuario, numPalavras){
 }
 
 function removeLinha(event){   
-    event.preventDefault();                    
-    $(this).parent().parent().remove();       //remove o avo do elemento que foi clicado (usado na funcao insere placar)
+    event.preventDefault();    
+    
+    var linha =  $(this).parent().parent(); // salva o avo do elemento que foi clicado na variavel linha (usado na funcao insere placar)
+
+    linha.fadeOut(1000); //da fadeout na linha mas nao remove do HTML
+    setTimeout(function(){   //setTimeout com uma funcao anomima pra remover a linha o tempo tem que ser igual o fadeout
+        linha.remove();
+    },1000);
+
 }
 
