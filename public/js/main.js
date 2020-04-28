@@ -1,15 +1,15 @@
 var campo = $(".campo");
 var tempoInicial = $("#tempo-digitacao").text();
 
-$(function(){                                      //funcao de atalho que inicia as funcoes assim que a pagina e carregada
-    atualizaTamanhofrase();
+$(function () {                                      //funcao de atalho que inicia as funcoes assim que a pagina e carregada
+    atualizaTamanhoFrase();
     inicializaContadores();
     inicializaCronometro();
     inicializaMarcadoresBorda();
     $("#botao-reiniciar").click(reiniciaJogo);
 })
 
-function atualizaTamanhofrase(){
+function atualizaTamanhoFrase() {
     var frase = $(".frase").text();                //pega frase
     var numPalavras = frase.split(" ").length;    //divide as palavras e conta o tamanho
 
@@ -17,9 +17,14 @@ function atualizaTamanhofrase(){
     tamanhofrase.text(numPalavras);              // adiciona o numPalavras dentro do span
 }
 
+function atualizaTempoDigitacao(tempo) {   //recebe o tempo da funcao trocaFraseAleatoria
+    tempoInicial = tempo;
+    $("#tempo-digitacao").text(tempo);
+}
 
-function inicializaContadores(){
-    campo.on("input", function(){                             //jQuery escutador de eventos
+
+function inicializaContadores() {
+    campo.on("input", function () {                             //jQuery escutador de eventos
         var conteudo = campo.val();                          //pega o valor do textarea
         var qtdPalavras = conteudo.split(/\S+/).length -1 ; //divide as palavras com expresao regular que verifica espacos
         $("#numero-palavras").text(qtdPalavras);           //coloca a qtdPalavas no span
@@ -31,8 +36,9 @@ function inicializaContadores(){
 }
 
 function inicializaCronometro(){
-    var tempoRestante = $("#tempo-digitacao").text(); 
+    
     campo.one("focus", function(){                     //diferente do campo.on o campo.one escuta o evento somente uma vez
+        var tempoRestante = $("#tempo-digitacao").text(); 
         $("#botao-reiniciar").attr("disabled", true);  //disabilita o botao reiniciar
         var cronometroID = setInterval(function(){       // setInterval inicia o intervalo de tempo com 1000
             tempoRestante--;                             //diminui tempo restante a cada 1000 mls
@@ -53,8 +59,9 @@ function finalizaJogo(){
 }
 
 function inicializaMarcadoresBorda(){
-    var frase = $(".frase").text();
+    
     campo.on("input", function(){
+        var frase = $(".frase").text();
         var digitado = campo.val();
         var comparavel = frase.substr(0, digitado.length); // compara a substring da frase com o que foi digitado
         if(digitado == comparavel){
