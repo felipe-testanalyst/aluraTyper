@@ -1,4 +1,5 @@
 $("#botao-frase").click(fraseAlearoria); //pega botao e agrega evento de click
+$("#botao-frase-id").click(buscaFrase);
 
 function fraseAlearoria(){
 
@@ -12,7 +13,7 @@ function fraseAlearoria(){
         }, 2000); 
     }).always(function(){                                       //always sempre executa funcao
         $("#spinner").toggle();                                 // toggle spinner
-    })
+    });
 }
 
 function trocaFraseAleatoria(dados) {   //traz dados da requisicao ajax
@@ -22,4 +23,30 @@ function trocaFraseAleatoria(dados) {   //traz dados da requisicao ajax
     frase.text(dados[numeroAleatorio].texto);       //troca o texto da frase para texto trazido pela requisicao
     atualizaTamanhoFrase();  
     atualizaTempoDigitacao(dados[numeroAleatorio].tempo); 
+}
+
+function buscaFrase(){
+    $("#spinner").toggle();
+
+    var fraseId = $("#frase-id").val();
+    var dados = {id : fraseId}               //colocar o valor do id do HTML Object fraseID em uma var
+
+    $.get("http://localhost:3000/frases", dados, trocaFrase).fail(function(){  //passar a variavel com id na requisicao Ajax
+        $("#erro").toggle();
+        setTimeout(function(){
+            $("#erro").toggle();
+        },2000);
+    }).always(function(){
+        $("#spinner").toggle()
+    });
+}
+
+function trocaFrase(dados){
+
+    var frase = $(".frase");
+
+    frase.text(dados.texto);
+    atualizaTamanhoFrase();
+    atualizaTempoDigitacao(dados.tempo);
+
 }
