@@ -1,4 +1,5 @@
 $("#botao-placar").click(mostraPlacar); 
+$("#botao-sync").click(sincronizaPlacar);
 
 function mostraPlacar(){
     $(".placar").stop().slideToggle(600);    //adiciona animacao para mostrar placar. o stop serve para interromper uma animacao caso seja chamada novamente
@@ -59,6 +60,32 @@ function removeLinha(event){
     setTimeout(function(){   //setTimeout com uma funcao anomima pra remover a linha o tempo tem que ser igual o fadeout
         linha.remove();
     },600);
+}
 
+function sincronizaPlacar(){
+    var placar = [];                                            //inicia array
+    var linhas = $("tbody>tr");                                // pega a tr(linha) dentro do tbody    
+
+    linhas.each(function(){                                    //para cada linha 
+        var usuario = $(this).find("td:nth-child(1)").text();  // (this=tr) pega o texto da td pelo seletor css e coloca na variavel usuario
+        var palavras = $(this).find("td:nth-child(2)").text(); 
+
+        var score = {                                    //constroi um objeto com usuario e pontos
+            usuario: usuario,
+            pontos: palavras
+        };
+
+        placar.push(score);                         // manda o objeto pro array
+
+    });
+
+    var dados = {                                  //cria um objeto dados com os valores do placar
+        placar: placar
+    };
+    
+    $.post("http://localhost:3000/placar", dados, function(){      //manda os dados para o servidor
+        console.log("Placar sincronizado com sucesso");
+    });
+    
 }
 
