@@ -18,6 +18,7 @@ function inserePlacar(){
 
     $(".placar").slideDown(500);     //abre placar quando insere usuario no placar
     scrollPlacar();
+    sincronizaPlacar();
 }
 
 
@@ -59,6 +60,7 @@ function removeLinha(event){
     linha.fadeOut(600); //da fadeout na linha mas nao remove do HTML
     setTimeout(function(){   //setTimeout com uma funcao anomima pra remover a linha o tempo tem que ser igual o fadeout
         linha.remove();
+        sincronizaPlacar();
     },600);
 }
 
@@ -89,3 +91,16 @@ function sincronizaPlacar(){
     
 }
 
+function atualizaPlacar(){
+
+    $.get("http://localhost:3000/placar", function(data){    //busca data no servidor
+        $(data).each(function(){                             //para cada linha da data
+            var linha = novaLinha(this.usuario, this.pontos); //chama funcao novalinha e coloca a data dentro da variave linha
+
+            linha.find(".botao-remover").click(removeLinha);
+
+            $("tbody").append(linha);            
+
+        })
+    })
+}

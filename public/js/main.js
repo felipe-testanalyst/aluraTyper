@@ -7,6 +7,7 @@ $(function () {                                      //funcao de atalho que inic
     inicializaCronometro();
     inicializaMarcadoresBorda();
     $("#botao-reiniciar").click(reiniciaJogo);
+    atualizaPlacar();
 })
 
 function atualizaTamanhoFrase() {
