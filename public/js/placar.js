@@ -9,7 +9,7 @@ function mostraPlacar(){
 function inserePlacar(){
     var placar = $(".placar");
     var corpoTabela = placar.find("tbody");      //busca pelo tbody dentro de placar e coloca na variavel corpoTabela
-    var usuario = "Felipe";
+    var usuario = $("#usuarios").val();
     var numPalavras = $("#numero-palavras").text();
 
     var linha = novaLinha(usuario, numPalavras); 
@@ -18,7 +18,7 @@ function inserePlacar(){
 
     $(".placar").slideDown(500);     //abre placar quando insere usuario no placar
     scrollPlacar();
-    sincronizaPlacar();
+    //sincronizaPlacar();
 }
 
 
@@ -60,7 +60,7 @@ function removeLinha(event){
     linha.fadeOut(600); //da fadeout na linha mas nao remove do HTML
     setTimeout(function(){   //setTimeout com uma funcao anomima pra remover a linha o tempo tem que ser igual o fadeout
         linha.remove();
-        sincronizaPlacar();
+        //sincronizaPlacar();
     },600);
 }
 
@@ -87,6 +87,13 @@ function sincronizaPlacar(){
     
     $.post("http://localhost:3000/placar", dados, function(){      //manda os dados para o servidor
         console.log("Placar sincronizado com sucesso");
+        $(".tooltip").tooltipster("open");
+    }).fail(function(){
+        $(".tooltip").tooltipster("open").tooltipster("content", "Falha ao sincronizar")
+    }).always(function(){
+        setTimeout(function(){
+            $(".tooltip").tooltipster("close");
+        }, 1200);
     });
     
 }
